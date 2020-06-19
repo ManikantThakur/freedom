@@ -1,0 +1,26 @@
+stages:
+    - build
+    - test
+    - deploy
+
+job 1:
+    before_script:
+        - docker info
+
+    stage: build
+    script:
+        - docker build -t my-docker-image .
+
+job 2:
+    stage: pull
+    script:
+        - docker pull ubuntu:16.04
+
+
+job 2:
+    stage: test
+    script: 
+        - docker run my-docker-image
+        - docker run -it --rm  ubuntu:16.04  echo "Hello from Ubuntu:6.04"
+
+
